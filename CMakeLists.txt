@@ -12,5 +12,7 @@ FetchContent_MakeAvailable(hard_assert)
 
 add_library(make_string STATIC make_string.c)
 target_include_directories(make_string PUBLIC include)
-target_compile_options(make_string PRIVATE -ansi -pedantic-errors -std=c11 -Wall -Wextra)
 target_link_libraries(make_string PRIVATE hard_assert)
+if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(make_string PRIVATE -ansi -pedantic-errors -std=c11 -Wall -Wextra)
+endif()
