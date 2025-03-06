@@ -4,7 +4,7 @@
     FetchContent_Declare(
         make_string
         GIT_REPOSITORY https://github.com/CesarBerriot/make_string.git
-        GIT_TAG master
+        GIT_TAG 1.0.0
     )
     FetchContent_MakeAvailable(make_string)
 
