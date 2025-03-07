@@ -5,14 +5,20 @@
 
 #define LIBRARY_NAME "make_string"
 
-static char * buffer = NULL;
+#ifndef thread_local
+	#ifdef _MSC_VER
+		#define thread_local __declspec(thread)
+	#else
+		#define thread_local _Thread_local
+	#endif
+#endif
+
+static thread_local char * buffer = NULL;
 
 static void cleanup(void);
 
 char * ms_make(char format[], ...)
-{	if(!buffer)
-		atexit(cleanup);
-	cleanup();
+{	cleanup();
 	va_list arguments;
 	va_start(arguments, format);
 	int buffer_size = vsnprintf(NULL, 0, format, arguments) + 1;
