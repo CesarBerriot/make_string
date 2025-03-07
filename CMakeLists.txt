@@ -10,7 +10,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(hard_assert)
 
-add_library(make_string make_string.c)
+add_library(make_string source/make_string.c)
 target_include_directories(make_string PUBLIC include)
 target_link_libraries(make_string PRIVATE hard_assert)
 if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
