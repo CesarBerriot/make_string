@@ -2,7 +2,7 @@
 #include <make_string.hpp>
 #include <cstring>
 
-TEST(make_string, re_use)
+TEST(make_string, nesting)
 {	char * float_string = strdup(make_string("float : %.2f", 65.287));
 	ASSERT_STREQ(float_string, "float : 65.29");
 
