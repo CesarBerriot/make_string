@@ -27,16 +27,12 @@ char * make_string(char format[], ...)
 }
 
 char * make_string_variadic(char format[], va_list arguments)
-{	cleanup();
+{	char * previous_buffer = buffer;
 	int buffer_size = vsnprintf(NULL, 0, format, arguments) + 1;
 	ha_assert(buffer_size > 0, LIBRARY_NAME, "buffer size computation failure");
 	buffer = malloc(buffer_size);
 	ha_assert(buffer, LIBRARY_NAME, "buffer allocation failure");
 	ha_assert(vsprintf(buffer, format, arguments) == (buffer_size - 1), LIBRARY_NAME, "buffer initialization failure");
+	free(previous_buffer);
 	return buffer;
-}
-
-static void cleanup(void)
-{	if(buffer)
-		free(buffer);
 }
