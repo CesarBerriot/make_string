@@ -1,8 +1,8 @@
 #include "make_string.h"
-#include <windows.h>
 #include <hard_assert.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <malloc.h>
 
 #define LIBRARY_NAME "make_string"
 
