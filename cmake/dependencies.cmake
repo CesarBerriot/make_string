@@ -3,7 +3,7 @@ include(FetchContent)
 FetchContent_Declare(
   hard_assert
   GIT_REPOSITORY https://github.com/CesarBerriot/hard_assert.git
-  GIT_TAG 1.2.2
+  GIT_TAG 1.2.3
 )
 FetchContent_Declare(
   setup_gtest
