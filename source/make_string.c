@@ -18,7 +18,7 @@ static thread_local char * buffer = NULL;
 
 static void cleanup(void);
 
-char * make_string(char format[], ...)
+char * make_string(char const format[], ...)
 {	va_list arguments;
 	va_start(arguments, format);
 	make_string_variadic(format, arguments);
@@ -26,7 +26,7 @@ char * make_string(char format[], ...)
 	return buffer;
 }
 
-char * make_string_variadic(char format[], va_list arguments)
+char * make_string_variadic(char const format[], va_list arguments)
 {	char * previous_buffer = buffer;
 	int buffer_size = vsnprintf(NULL, 0, format, arguments) + 1;
 	ha_assert(buffer_size > 0, LIBRARY_NAME, "buffer size computation failure");
