@@ -28,8 +28,13 @@ char * make_string(char const format[], ...)
 
 char * make_string_variadic(char const format[], va_list arguments)
 {	char * previous_buffer = buffer;
-	int buffer_size = vsnprintf(NULL, 0, format, arguments) + 1;
-	ha_assert(buffer_size > 0, LIBRARY_NAME, "buffer size computation failure");
+	int buffer_size;
+	{	va_list arguments_copy;
+		va_copy(arguments_copy, arguments);
+		buffer_size = vsnprintf(NULL, 0, format, arguments_copy) + 1;
+		va_end(arguments_copy);
+		ha_assert(buffer_size > 0, LIBRARY_NAME, "buffer size computation failure");
+	}
 	buffer = malloc(buffer_size);
 	ha_assert(buffer, LIBRARY_NAME, "buffer allocation failure");
 	ha_assert(vsprintf(buffer, format, arguments) == (buffer_size - 1), LIBRARY_NAME, "buffer initialization failure");
